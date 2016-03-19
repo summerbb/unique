@@ -1,0 +1,191 @@
+import java.util.*;
+import java.util.Random;
+
+public class Calculate {
+
+    public static void main(String[] args) {
+        // TODO 自动生成的方法存根
+         Scanner in = new Scanner(System.in);
+         Random random=new Random();
+         int p=0;
+         int t;
+         System.out.println("请输入要打印的题目数量：");
+         int num=in.nextInt();
+         System.out.println("请输入取值范围最大值：");
+         int max=in.nextInt();
+         System.out.println("请输入取值范围最小值：");
+         int min=in.nextInt();
+         System.out.println("请输入加减有无负数（1：有  0：无）：");
+         int neg=in.nextInt();
+         System.out.println("请输入有无乘除法（1：有  0：无）：");
+         int mul=in.nextInt();
+         System.out.println("请输入除法有无余数（1：有  0：无）：");
+         int rem=in.nextInt();
+         System.out.println("请输入有无括号（1：有  0：无）：");
+         int bra=in.nextInt(); 
+        for(int i=0;i<num;i++)
+        {
+        int a=(int)(Math.random()*(max-min+1)+min);
+        int b=(int)(Math.random()*(max-min+1)+min);
+        int c=(int)(Math.random()*(max-min+1)+min);
+        int d=(int)(Math.random()*(max-min+1)+min);
+        if(bra==0)
+        {
+        if(mul==1)
+        {
+             p=(int)(Math.random()*4);
+        }
+        if(mul==0)
+        {
+            p=(int)(Math.random()*2);
+        }
+        
+             switch(p)
+             { 
+             case 0:
+                System.out.println(a+"/"+b+" + "+c+"/"+d+"=");
+                break;
+             case 1:
+                if(neg==0)//减法没有负数
+                {
+                     if(a<c)
+                     {
+                           t=a;
+                           a=c;
+                           c=t;
+                     }
+                     System.out.println(a+"/"+b+" - "+c+"/"+d+"=");
+                     break;
+                 }
+                 else
+                 {
+                      System.out.println(a+"/"+b+" - "+c+"/"+d+"=");
+                       break;
+                 }
+            case 2:
+               System.out.println(a+"/"+b+" * "+c+"/"+d+"=");
+               break;
+            case 3:
+                if(b==0||d==0)//分母为零则不计入总数
+                {   
+                    i=i-1;
+                    break;
+                }
+                else if(rem==0)//除法没有余数
+                {
+                    if(a/b%c/d==0)
+                    {
+                        System.out.println(a+"/"+b+" / "+c+"/"+d+"=");
+                        break;
+                    }
+                    else
+                    {
+                        i=i-1;break;
+                    }
+                }
+                else if(rem==1)//除法有余数
+                {
+                    if(a/b%c/d!=0)
+                    {
+                        System.out.println(a+"/"+b+" / "+c+"/"+d+"=");
+                        break;
+                    }
+                    else
+                    {
+                        i=i-1;
+                        break;
+                    }
+                }
+            
+             if((i+1)%num==0)
+                {
+                 System.out.println();
+                }
+                else
+                {
+                    System.out.println(" ");
+                }
+             }
+        }
+             else
+             {
+                 if(mul==1)
+                    {
+                         p=(int)(Math.random()*4);
+                    }
+                    if(mul==0)
+                    {
+                        p=(int)(Math.random()*2);
+                    }
+                    
+                         switch(p)
+                         { 
+                         case 0:
+                             System.out.println(a+"/"+"("+b+" + "+c+")"+"/"+d+"=");
+                            break;
+                         case 1:
+                            if(neg==0)//减法没有负数
+                            {
+                                 if(a<c)
+                                 {
+                                       t=a;
+                                       a=c;
+                                       c=t;
+                                 }
+                                 System.out.println(a+"/"+"("+b+" - "+c+")"+"/"+d+"=");
+                                 break;
+                             }
+                             else
+                             {
+                                 System.out.println(a+"/"+"("+b+" - "+c+")"+"/"+d+"=");
+                                   break;
+                             }
+                        case 2:
+                            System.out.println(a+"/"+"("+b+" * "+c+")"+"/"+d+"=");
+                           break;
+                        case 3:
+                            if(b==0||d==0)//分母为零则不计入总数
+                            {   
+                                i=i-1;
+                                break;
+                            }
+                            else if(rem==0)//除法没有余数
+                            {
+                                if(a/b%c/d==0)
+                                {
+                                    System.out.println(a+"/"+"("+b+" / "+c+")"+"/"+d+"=");
+                                    break;
+                                }
+                                else
+                                {
+                                    i=i-1;break;
+                                }
+                            }
+                            else if(rem==1)//除法有余数
+                            {
+                                if(a/b%c/d!=0)
+                                {
+                                    System.out.println(a+"/"+"("+b+" / "+c+")"+"/"+d+"=");
+                                    break;
+                                }
+                                else
+                                {
+                                    i=i-1;
+                                    break;
+                                }
+                            }
+                        
+                         if((i+1)%num==0)
+                            {
+                             System.out.println();
+                            }
+                            else
+                            {
+                                System.out.println(" ");
+                            }
+                         }
+                    }
+             }
+    }
+    
+}
