@@ -1,0 +1,547 @@
+import java.util.Random;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+public class Arithmetic {
+
+    public static void main(String[] args) {
+        // TODO 自动生成的方法存根
+        int c;//选择
+        int c1,c4,c5,c6,c7,c8;
+        int a,b,d1;//二位数运算
+        int c2,c3;
+        int e=0;//运算符
+        String s="";
+        double d=0.0;//2位数的结果，用户
+        double f=0.0,g=0.0;//2位数结果，系统,多位数结果，系统
+        int flag=0;//判断是否输出
+        int m=0;//题数
+        Random rand = new Random();
+        for(int i=0;i<100000000;i++)
+            {
+                System.out.println("请输入选择：1、2位数运算  2、多位数运算 3、退出");
+                Scanner input=new Scanner(System.in) ;
+                c=input.nextInt();
+                if(c==1)
+                {
+                    System.out.println("请输入选择：1 、有乘除法 2、无乘除法");
+                     Scanner input1=new Scanner(System.in) ;
+                     c1=input1.nextInt();
+                     System.out.println("请输入数值范围的前域 ");
+                     Scanner input2=new Scanner(System.in) ;
+                     c2=input2.nextInt();
+                     System.out.println("请输入数值范围的后域");
+                     Scanner input3=new Scanner(System.in) ;
+                     c3=input3.nextInt();
+                     System.out.println("请输入选择：1、加减有负数 2、加减无负数");
+                     Scanner input4=new Scanner(System.in) ;
+                     c4=input4.nextInt();
+                     System.out.println("请输入选择：1、除法有余数 2、除法无余数");
+                     Scanner input5=new Scanner(System.in) ;
+                     c5=input5.nextInt();
+                     System.out.println("请输入出题数量");
+                     Scanner input6=new Scanner(System.in) ;
+                     c6=input6.nextInt();
+                     System.out.println("请输入在一行中输出几列运算式？");
+                     Scanner input7=new Scanner(System.in) ;
+                     c7=input7.nextInt();
+                        String []Repeat=new String[2*c6];
+                     for(int w=0;w<c6;w++)
+                     {
+                         int w1;
+                         w1=w;
+                        //有无乘除法
+                         if(c1==1)
+                         {
+                             e=rand.nextInt(4);
+                         }
+                         if(c1==2)
+                         {
+                             e=rand.nextInt(2);
+                         }
+                         //数值范围
+                         a=rand.nextInt(c3)%(c3-c2+1)+c2;
+                         b=rand.nextInt(c3)%(c3-c2+1)+c2;
+                         //加减有无负数
+                         if(c4==1)//有负数
+                         {
+                             flag=0;
+                         }
+                         if(c4==2)
+                         { 
+                             if(e==0)
+                             {
+                                 if((a+b)>=0)
+                                 {
+                                     flag=0;
+                                 }
+                                 else 
+                                 {
+                                     flag=1;
+                                 }
+                             }
+                             if(e==1)
+                             {
+                                 if((a-b)>=0)
+                                 {
+                                     flag=0;
+                                 }
+                                 else
+                                 {
+                                     flag=1;
+                                 }
+                             }
+                         }
+                        //符号
+                         if(e==0)
+                         {
+                             s="+";
+                             f=a+b;
+                         }
+                         if(e==1)
+                         {
+                             s="-";
+                             f=a-b;
+                         }
+                         if(e==2)
+                         {
+                             s="*";
+                             f=a*b;
+                         }
+                         if(e==3)
+                         {
+                             if(b!=0)
+                             {
+                                 if(c5==1)
+                                 {
+                                    s="/"; 
+                                    f=a/b;
+                                 }
+                                 if(c5==2)
+                                 {
+                                     if(a%b==0)
+                                     {
+                                         s="/";
+                                         f=a/b;
+                                     }
+                                     if(a%b!=0)
+                                     {
+                                         flag=1;
+                                     }
+                                 }
+                                 
+                             }
+                         }
+                         //判断重复
+                         if(a<0.0&&b>=0.0)
+                         {
+                             Repeat[w]="("+a+")"+s+b;
+                         }
+                         if(a>=0.0&&b<0.0)
+                         {
+                             Repeat[w]=a+s+"("+b+")";
+                         }
+                         if(a<0.0&&b<0.0)
+                         {
+                             Repeat[w]="("+a+")"+s+"("+b+")";
+                         }
+                         if(a>=0.0&&b>=0.0)
+                         {
+                             Repeat[w]=a+s+b;
+                         }
+                         for(int w2=0;w2<w1;w2++)
+                         {
+                             if(Repeat[w].equals(Repeat[w2]))
+                             {
+                                 flag =1;
+                             }
+                             else
+                             {flag =0;}
+                         }
+                         //打印
+                         if(flag==0)
+                         {
+                             if((w+1)%c7==0)
+                               {
+                                 for(int k=0;k<10000000;k++)
+                                   {
+                                       String inputx=JOptionPane.showInputDialog(Repeat[w]+"="+"请输入计算结果");
+                                       if(inputx!=null&&!inputx.equals(""))
+                                      {
+                                         d=Double.parseDouble(inputx);
+                                         break;
+                                      }     
+                                   }
+                                   if(d==f)
+                                     {
+                                         System.out.println(Repeat[w]+"="+d+"正确");    
+                                         m++;
+                                     }
+                                     if(d!=f)
+                                     {
+                                         System.out.println(Repeat[w]+"="+d+"不正确");
+                                     }
+                               }
+                               else
+                               {
+                                   
+                                   for(int k=0;k<10000000;k++)
+                                   {
+                                       String inputx=JOptionPane.showInputDialog(Repeat[w]+"="+"请输入计算结果");
+                                       if(inputx!=null&&!inputx.equals(""))
+                                      {
+                                         d=Double.parseDouble(inputx);
+                                         break;
+                                      }     
+                                   }
+                                 if(d==f)
+                                 {
+                                     System.out.print(Repeat[w]+"="+d+"正确");    
+                                     m++;
+                                 }
+                                 if(d!=f)
+                                 {
+                                     System.out.print(Repeat[w]+"="+d+"不正确");
+                                 }
+                               }
+                         }
+                         if(flag==1)
+                         {
+                             c6++;
+                         }
+                         
+                     }
+                     System.out.println("共"+c6+"道题"+"    "+m+"道题正确");
+                  }
+                if(c==2)
+                {
+                     
+                    System.out.println("请输入选择：1 、有乘除法 2、无乘除法");
+                     Scanner input1=new Scanner(System.in) ;
+                     c1=input1.nextInt();
+                     System.out.println("请输入数值范围的前域 ");
+                     Scanner input2=new Scanner(System.in) ;
+                     c2=input2.nextInt();
+                     System.out.println("请输入数值范围的后域");
+                     Scanner input3=new Scanner(System.in) ;
+                     c3=input3.nextInt();
+                    /* System.out.println("请输入选择：1、加减有负数 2、加减无负数");
+                     Scanner input4=new Scanner(System.in) ;
+                     c4=input4.nextInt();
+                     System.out.println("请输入选择：1、除法有余数 2、除法无余数");
+                     Scanner input5=new Scanner(System.in) ;
+                     c5=input5.nextInt();*/
+                     System.out.println("请输入出题数量");
+                     Scanner input6=new Scanner(System.in) ;
+                     c6=input6.nextInt();
+                     System.out.println("请输入在一行中输出几列运算式？");
+                     Scanner input7=new Scanner(System.in) ;
+                     c7=input7.nextInt();
+                     System.out.println("请输入选择: 1、有括号 2、无括号");
+                     Scanner input8=new Scanner(System.in) ;
+                     c8=input8.nextInt();
+                    //有无乘除法
+                     if(c1==1)
+                     {
+                         e=rand.nextInt(4);
+                     }
+                     if(c1==2)
+                     {
+                         e=rand.nextInt(2);
+                     }
+                     //数值范围
+                     a=rand.nextInt(c3)%(c3-c2+1)+c2;
+                     b=rand.nextInt(c3)%(c3-c2+1)+c2;
+                     String []Repeat=new String[2*c6];
+                     if(e==0)
+                     {
+                         s="+";
+                         g=a+b;
+                     }
+                     if(e==1)
+                     {
+                         s="-";
+                         g=a-b;
+                     }
+                     if(e==2)
+                     {
+                         s="*";
+                         g=a*b;
+                     }
+                     if(e==3)
+                     {
+                         if(b==0)
+                         {
+                             flag=1;
+                         }
+                         if(b!=0)
+                         {
+                             flag=0;
+                             s="/";
+                             g=a/b;
+                         }
+                     }
+                     //出题数量
+                     for(int w=0;w<c6;w++)
+                     {
+                         int p;//0为在原来基础上前面加数，1则是在后面加数
+                         int ws;//几位数的运算
+                         ws=rand.nextInt(8);
+                         Repeat[w]=a+s+b;
+                         if(c8==1)//有括号
+                         {
+                             
+                             for(int w1=0;w1<ws;w1++)
+                             {
+                                 d1=rand.nextInt(c3)%(c3-c2+1)+c2;
+                                 p=rand.nextInt(2);
+                                 if(c1==1)
+                                 {
+                                     e=rand.nextInt(4);
+                                 }
+                                 if(c1==2)
+                                 {
+                                     e=rand.nextInt(2);
+                                 }
+                                 if(e==0)
+                                 {
+                                     s="+";
+                                     g=d1+g;
+                                 }
+                                 if(e==1)
+                                 {
+                                     s="-";
+                                     if(p==0)
+                                     {
+                                         g=d1-g;
+                                     }
+                                     if(p==1)
+                                     {
+                                         g=g-d1;
+                                     }
+                                 }
+                                 if(e==2)
+                                 {
+                                     s="*";
+                                     g=d1*g;
+                                 }
+                                 if(e==3)
+                                 {
+                                     if(b==0||g==0)
+                                     {
+                                         flag=1;
+                                     }
+                                     if(b!=0&&g!=0)
+                                     {
+                                         flag=0;
+                                         s="/";
+                                         if(p==0)
+                                         {
+                                             g=d1/g;
+                                         }
+                                         if(p==1)
+                                         {
+                                             g=g/d1;
+                                         }
+                                     }
+                                 }
+                             if(p==0)
+                             {
+                                  Repeat[w]=d1+s+"("+Repeat[w]+")"; 
+                             }
+                             if(p==1)
+                             {
+                                 Repeat[w]="("+Repeat[w]+")"+s+d1;         
+                             }
+                             }
+                         }
+                         if(c8==2)//无括号
+                         {
+                             int length=0;
+                             
+                             String [][]Repeat1=new String[2*c6][100];
+                             Repeat1[w][0]=""+a;
+                             Repeat1[w][1]=s;
+                             Repeat1[w][2]=""+b;
+                             for(int w1=0;w1<ws;w1++)
+                             {
+                                
+                                 d1=rand.nextInt(c3)%(c3-c2+1)+c2;
+                                 p=rand.nextInt(2);
+                                 if(c1==1)
+                                 {
+                                     e=rand.nextInt(4);
+                                 }
+                                 if(c1==2)
+                                 {
+                                     e=rand.nextInt(2);
+                                 }
+                                 if(e==0)
+                                 {
+                                     s="+";
+                                    
+                                 }
+                                 if(e==1)
+                                 {
+                                     s="-";
+                                    
+                                 }
+                                 if(e==2)
+                                 {
+                                     s="*";
+                                     
+                                 }
+                                 if(e==3)
+                                 {
+                                     if(b==0)
+                                     {
+                                         flag=1;
+                                     }
+                                     if(b!=0)
+                                     {
+                                         flag=0;
+                                         s="/";
+                                        
+                                     }
+                                 }
+
+                             if(p==0)
+                             {
+                                 int sl=0;//实际长度
+                                 Repeat[w]=d1+s+Repeat[w];
+                                 length=Repeat1[w].length;
+                                 for(int xx=0;xx<length;xx++)
+                                 {
+                                     String ss="";
+                                     ss=Repeat1[w][xx];
+                                     if(ss!=null&&!ss.equals(""))
+                                     {
+                                         sl++;
+                                     }
+                                     else
+                                     {
+                                        break;
+                                     }
+                                 }
+                                 
+                                  for(int l=0;l<sl;l++)
+                                  {
+                                      Repeat1[w][l+2]=Repeat1[w][l];
+                                  }
+                                  Repeat1[w][0]=""+d1;
+                                  Repeat1[w][1]=s;
+                             }
+                             if(p==1)
+                             {
+                                 int sl=0;
+                                 Repeat[w]=Repeat[w]+s+d1;
+                                 length=Repeat1[w].length;
+                                 for(int xx=0;xx<length;xx++)
+                                 {
+                                     String ss="";
+                                     ss=Repeat1[w][xx];
+                                     if(ss!=null&&!ss.equals(""))
+                                     {
+                                         sl++;
+                                     }
+                                     else
+                                     {
+                                         break;
+                                     }
+                                 }
+                                 Repeat1[w][sl]=s;
+                                 Repeat1[w][sl+1]=""+d1;
+                             }
+                            }
+                             //计算结果
+                             int []ns=new int[10];
+                             int []nf=new int[9];
+                             int ll=(Repeat1[w].length);
+                             int sl=0;
+                             for(int xx=0;xx<ll;xx++)
+                             {
+                                 String ss="";
+                                 ss=Repeat1[w][xx];
+                                 if(ss!=null&&!ss.equals(""))
+                                 {
+                                     sl++;
+                                 }
+                                 else
+                                 {
+                                     break;
+                                 }
+                             }                             
+                             for(int l1=0;l1<sl;l1++)
+                             {
+                                 if(l1%2==0)
+                                 {
+                                     ns[l1/2]=Integer.parseInt(Repeat1[w][l1]);
+                                 }
+                                 if(l1%2!=0)
+                                 {
+                                     
+                                     nf[l1/2]=Repeat1[w][l1].charAt(0);
+                                 }
+                             }
+                             
+                             if(c1==1)
+                             {
+                                 
+                             }
+                             if(c1==2)
+                             {
+                                g=ns[0];
+                             for(int l2=1;l2<(sl/2+1);l2++)
+                             {
+                                 if(nf[l2-1]==43)
+                                 {
+                                     g=g+ns[l2];
+                                 }
+                                 if(nf[l2-1]==45)
+                                 {
+                                     g=g-ns[l2];
+                                 }
+                             }
+                             }
+                         }
+                         
+                           
+                         
+                       //判断重复
+                         int w3=w;
+                         for(int w2=0;w2<w3;w2++)
+                         {
+                             if(Repeat[w].equals(Repeat[w2]))
+                             {
+                                 flag =1;
+                             }
+                             else
+                             {flag =0;}
+                         }
+                         //打印
+                         if(flag==1)
+                         {
+                             c6++;
+                         }
+                         if(flag==0)
+                         {
+                             if((w+1)%c7==0)
+                             {
+                                 System.out.println(Repeat[w]+"="+g+"  ");
+                             }
+                             else
+                             {
+                                 System.out.print(Repeat[w]+"="+g+"  ");
+                             }
+                         }
+                     }
+                }
+                if(c==3)
+                {
+                    break;
+                }
+                
+            }
+    }
+
+}
